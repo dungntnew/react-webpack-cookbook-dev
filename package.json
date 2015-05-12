@@ -1,0 +1,24 @@
+{
+  "name": "react-webpack-cookbook-dev",
+  "version": "1.0.0",
+  "description": "React Wepack Getting started",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dungntnew/react-webpack-cookbook-dev.git"
+  },
+  "author": "dungntnew",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dungntnew/react-webpack-cookbook-dev/issues"
+  },
+  "homepage": "https://github.com/dungntnew/react-webpack-cookbook-dev",
+  "devDependencies": {
+    "node-libs-browser": "^0.5.0",
+    "webpack": "^1.9.4"
+  }
+}
