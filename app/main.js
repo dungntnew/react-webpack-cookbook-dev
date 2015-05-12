@@ -1,8 +1,8 @@
-'use strict';
-var componenet = require('./component.js');
-if (document.body) {
-	document.body.appendChild(componenet());
-}
+import React from 'react';
+import Hello from './component';
 
-var render1 = require('./modules/module2.js').do;
-document.body.appendChild(render1());
+main();
+
+function main() {
+    React.render(<Hello/>, document.getElementById('app'));
+};

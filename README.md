@@ -173,3 +173,82 @@ app/modules/module1.js
 app/modules/module2.js
 ```
 
+### Installing ReactJs
+
+```sh
+$ npm install react --save
+```
+Now we can start using reactjs in code
+
+#### Using React In Code
+*In any file*
+```js
+var React = require('react');
+
+export default class Hello extends React.Component {
+   render() {
+      return <h1>Hello world</h1>;
+   }
+}
+```
+
+*main.js*
+```js
+import React from 'react'
+import Hello from './componenet';
+
+main();
+
+function main(){
+   React.render(<Hello />, document.getEledmentById('app'));
+}
+```
+
+*build/index.jtml*
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script src="http://localhost:8080/webpack-dev-server.js"></script>
+    <script src="bundle.js"></script>
+  </body>
+</html>
+```
+
+### Converting JSX
+To use JSX syntax we need webpack to transform javascripts. This is the job of a loader.
+We will use Babel as it's nice!
+```bash
+$ npm install babel-loader --save-dev
+```
+Now configure webpack to use this loader
+
+*webpack.config.js*
+```js
+var path = require('path');
+var config = {
+  entry: path.resolve(__dirname, 'app/main.js'),
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js'
+  },
+  module: {
+    loaders: [{
+      test: /\.jsx?$/, // A regexp to test the require path. accepts either js or jsx
+      loader: 'babel' // The module to load. "babel" is short for "babel-loader"
+    }]
+  }
+};
+
+module.exports = config;
+```
+
+Webpack will test each path required in code. In this project we using ES6 module loader syntax,
+which means that require path of import MyComponent from './Component.jsx';
+
+Run npm run dev to reload.
