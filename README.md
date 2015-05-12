@@ -252,3 +252,39 @@ Webpack will test each path required in code. In this project we using ES6 modul
 which means that require path of import MyComponent from './Component.jsx';
 
 Run npm run dev to reload.
+
+### Running minified file in development
+Instead of making Webpack go through React JS and all its dependencies, you can override the behavior in development.
+*webpack.config.js*
+
+```js
+var path = require('path');
+var node_modules = path.resolve(__dirname, 'node_modules');
+var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js');
+
+var config = {
+  entry: path.resolve(__dirname, 'app/main.js'),
+  resolve: {
+    alias: {
+      'react': pathToReact
+    }
+  },
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js'
+  },
+  module: {
+    noParse: [pathToReact]
+  }
+};
+
+module.exports = config;
+```
+
+We do two things in this configuration:
+
+- Whenever "react" is required in the code it will fetch the minified React JS file instead of going to node_modules
+
+- Whenever Webpack tries to parse the minified file, we stop it, as it is not necessary
+
+Take a look at Optimizing development for more information on this.
