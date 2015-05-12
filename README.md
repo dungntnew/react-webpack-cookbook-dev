@@ -103,11 +103,49 @@ And startup dev server from terminal
 $ npm run dev
 ```
 This script do some things as:
-1. webpack-dev-server start a web service on localhost:8181
-2. --devtool eval: create source urls for code, making able to pinpoint by filename and
+- webpack-dev-server start a web service on localhost:8181
+- --devtool eval: create source urls for code, making able to pinpoint by filename and
  line number where any errors are thrown
-3. --progress - Whill show progress of bundling your application
-4. -- colors: colors in the terminal
-5. --content-base - Points to the output directory configured
+- --progress - Whill show progress of bundling your application
+- -- colors: colors in the terminal
+- --content-base - Points to the output directory configured
+
+## Automatic browser refresh
+
+When webpack-dev-server is running it will watch your files for changes. When that happens
+it rebundles your project and notifies browsers listening to refresh. To trigger this 
+behaviour you neet to change your index.html in build/ folder.
+
+*build/index.html*
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+  </head>
+  <body>
+    <script src="http://localhost:8080/webpack-dev-server.js"></script>
+    <script src="bundle.js"></script>
+  </body>
+</html>
+```
+
+We added a scripts that refresh the application when a change occurs. You will also need to add an entry point to your configuration.
+```js
+var path = require('path');
 
 
+module.exports = {
+    entry: ['webpack/hot/dev-server', path.resolve(__dirname, 'app/main.js')],
+    output: {
+        path: path.resolve(__dirname, 'build'),
+        filename: 'bundle.js',
+    },
+};
+```
+
+### Default environment
+
+In the example above we created our own index.html file to give more freedom and control. It is also possible to run the application from http://localhost:8181/webpack-dev-server/bundle. 
+This will fire up a default index.html file that you do not control. It also fires this file up in an iFrame allowing for a status bar to indicate the status of the rebundling process.

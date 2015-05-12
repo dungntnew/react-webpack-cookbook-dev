@@ -1,3 +1,6 @@
 'use strict';
 var componenet = require('./component.js');
-document.body.appendChild(componenet());
+if (document.body) {
+	document.body.appendChild(componenet());
+	
+}
