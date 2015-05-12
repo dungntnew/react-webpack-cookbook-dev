@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack",
+    "dev": "webpack-dev-server --port 8181 --devtool eval --progress --colors --hot --content-base build"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
   "devDependencies": {
     "node-libs-browser": "^0.5.0",
     "webpack": "^1.9.4"
+  },
+  "dependencies": {
+    "webpack-dev-server": "^1.8.2"
   }
 }

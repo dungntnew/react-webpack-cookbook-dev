@@ -80,3 +80,34 @@ You also checkout source in via branch gettting-started
 ```bash
 $ git checkout getting-started && npm install
 ```
+
+## Running a workflow
+
+### Setting up webpack-dev-server
+
+As a first step, hit npm i webpack-dev-server --save
+```sh
+$ npm i web-pack-dev-server --save
+```
+And include settings to package.json scripts
+```js
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "dev": "webpack-dev-server --port 8181 --devtool eval --progress --colors --hot --content-base build"
+  }
+```
+
+And startup dev server from terminal
+```sh
+$ npm run dev
+```
+This script do some things as:
+1. webpack-dev-server start a web service on localhost:8181
+2. --devtool eval: create source urls for code, making able to pinpoint by filename and
+ line number where any errors are thrown
+3. --progress - Whill show progress of bundling your application
+4. -- colors: colors in the terminal
+5. --content-base - Points to the output directory configured
+
+
