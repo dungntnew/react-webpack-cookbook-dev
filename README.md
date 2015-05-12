@@ -1,6 +1,17 @@
 # react-webpack-cookbook-dev
 using react with webpack to dev front-end
 
+# quick-start
+```sh
+$ git clone git@github.com:dungntnew/react-webpack-cookbook-dev.git
+$ cd react-webpack-cookbook-dev & git checkout develop
+$ npm run develop
+```
+
+Open browser at: [http://127.0.0.1:8181] to see result,
+Any change in app/ folder occurd will fire event autoreload browser and restart server.
+Enjoy!
+
 ### install requirement packages
 
 In this project uses Webpack + React for fast developing. Make a change in your file and instantanously see your update!
