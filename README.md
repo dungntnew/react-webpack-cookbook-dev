@@ -149,3 +149,15 @@ module.exports = {
 
 In the example above we created our own index.html file to give more freedom and control. It is also possible to run the application from http://localhost:8181/webpack-dev-server/bundle. 
 This will fire up a default index.html file that you do not control. It also fires this file up in an iFrame allowing for a status bar to indicate the status of the rebundling process.
+
+
+## Modules & Understanding Paths
+Webpack allows you to use different module patterns. include ES6, CommonJS, AMD. To see more about module
+system, let's refer this article for details. In this example, module1.js and module2.js then we 
+include in main.js via relative path
+
+```path
+app/modules/module1.js
+app/modules/module2.js
+```
+
