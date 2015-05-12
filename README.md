@@ -12,6 +12,7 @@ Open browser at: [http://127.0.0.1:8181] to see result,
 Any change in app/ folder occurd will fire event autoreload browser and restart server.
 Enjoy!
 
+# create app from scratch step-by-step
 ### install requirement packages
 
 In this project uses Webpack + React for fast developing. Make a change in your file and instantanously see your update!
