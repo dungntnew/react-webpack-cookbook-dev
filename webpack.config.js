@@ -29,8 +29,11 @@ var config = {
            test: /\.scss$/,  // sass
            loader: 'style!css!sass'
         }, {
-            test: /\.(png|jpg)$/,
+            test: /\.(png|jpg)$/,  // image base 64
             loader: 'url?limit=25000'
+        }, {
+            test: /\.woff$/,  // 1 in 4 types fonts: .woff | .svg .. 
+            loader: 'url?limit=100000'
         }],
         noParse: [path_to_react]
     }
