@@ -28,6 +28,9 @@ var config = {
         }, {
            test: /\.scss$/,  // sass
            loader: 'style!css!sass'
+        }, {
+            test: /\.(png|jpg)$/,
+            loader: 'url?limit=25000'
         }],
         noParse: [path_to_react]
     }
