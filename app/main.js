@@ -1,5 +1,6 @@
 import React from 'react';
 import Hello from './component';
+import './main.css';
 
 main();
 

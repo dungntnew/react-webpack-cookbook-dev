@@ -288,3 +288,132 @@ We do two things in this configuration:
 - Whenever Webpack tries to parse the minified file, we stop it, as it is not necessary
 
 Take a look at Optimizing development for more information on this.
+
+### Preparing CSS loading
+install the two loaders: npm install css-loader style-loader --save-dev.
+in the webpack.config.js file you can add the fllowing loader configuration:
+*webpack.config.js*
+```js
+var path = require('path');
+var config = {
+  entry: path.resolve(__dirname, 'app/main.js')
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js'
+  },
+  module: {
+    loaders: [{
+      test: /\.jsx$/,
+      loader: 'jsx'
+    }, {
+      test: /\.css$/, // Only .css files
+      loader: 'style!css' // Run both loaders
+    }]
+  }
+};
+
+module.exports = config;
+```
+
+### Loading a CSS file
+loading a css file is a simple as loading any file:
+*main.js*
+```js
+import './main.css';
+// Other code
+```
+*Componenet.jsx*
+```js
+import './Component.css';
+import React from 'react';
+
+export default React.createClass({
+  render: function () {
+    return <h1>Hello world!</h1>
+  }
+});
+```
+
+### CSS loading strategies
+
+Depending on your application you might consider three main strategies. In addition to this you should consider including some of your basic CSS inlined with the initial payload (index.html). This will set the structure and maybe a loader while the rest of your application is downloading and executing.
+
+#### All in one
+
+In your main entry point, e.g. app/main.js you can load up your entire CSS for the whole project:
+
+*app/main.js*
+
+```js
+import './project-styles.css';
+// Other JS code
+```
+The CSS is included in the application bundle and does not need to download.
+
+#### Lazy loading
+
+If you take advantage of lazy loading by having multiple entry points to your application, you can include specific CSS for each of those entry points:
+
+*app/main.js*
+
+```js
+import './style.css';
+// Other JS code
+app/entryA/main.js
+
+import './style.css';
+// Other JS code
+app/entryB/main.js
+
+import './style.css';
+// Other JS code
+```
+You divide your modules by folders and include both CSS and JavaScript files in those folders. Again, the imported CSS is included in each entry bundle when running in production.
+
+#### Component specific
+
+With this strategy you create a CSS file for each component. It is common to namespace the CSS classes with the component name, thus avoiding some class of one component interfering with the class of an other.
+
+*app/components/MyComponent.css*
+```js
+.MyComponent-wrapper {
+  background-color: #EEE;
+}
+app/components/MyComponent.jsx
+
+import './MyComponent.css';
+import React from 'react';
+
+export default React.createClass({
+  render: function () {
+    return (
+      <div className="MyComponent-wrapper">
+        <h1>Hello world</h1>
+      </div>
+    )
+  }
+});
+```
+
+#### Using inline styles instead of stylesheets
+
+With "React Native" you do not use stylesheets at all, you only use the style-attribute. By defining your CSS as objects. Depending on your project, you might consider this as your CSS strategy.
+```js
+app/components/MyComponent.jsx
+
+import React from 'react';
+
+var style = {
+  backgroundColor: '#EEE'
+};
+
+export default React.createClass({
+  render: function () {
+    return (
+      <div style={style}>
+        <h1>Hello world</h1>
+      </div>
+    )
+  }
+});
+```

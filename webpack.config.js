@@ -19,6 +19,9 @@ var config = {
         loaders: [{ 
             test: /\.jsx?$/, // a regexp to test the require path. accepts either js or jsx
             loader: 'babel' // the module to load. 
+        }, {
+            test: /\.css$/, // Only .css files
+            loader: 'style!css' // Run both loaders
         }],
         noParse: [path_to_react]
     }
