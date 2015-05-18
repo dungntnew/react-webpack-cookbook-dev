@@ -1,7 +1,6 @@
 //---- module2 ----
 
 var util = require('./module1.js');
-var component = require('../component.js')
 
 var add = function(a, b){
 	return a + b;

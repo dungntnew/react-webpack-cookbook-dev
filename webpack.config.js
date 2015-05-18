@@ -1,40 +1,41 @@
 /// <reference path="typings/node/node.d.ts"/>
 var path = require('path');
 var node_modules = path.resolve(__dirname, 'node_modules');
-var path_to_react = path.resolve(node_modules, 'react/dist/react.min.js');
+var path_to_react = path.resolve(node_modules, 'react/dist/react.js');
 
 var config = {
+    cache: true,
     entry: ['webpack/hot/dev-server', 
             path.resolve(__dirname, 'app/main.js')],
     resolve: {
       alias: {
           'react': path_to_react
-      }
+      },
+      extensions: ['', '.js', '.jsx'],
+      modulesDirectories: ['node_modules', 'modules']
     },
     output: {
         path: path.resolve(__dirname, 'build'),
+        publicPath: 'http://localhost:8181/assets',
         filename: 'bundle.js',
     },
+//    externals: {
+//        'react': 'React'
+//    },
     module: {
-        loaders: [{ 
-            test: /\.jsx?$/, // a regexp to test the require path. accepts either js or jsx
-            loader: 'babel' // the module to load. 
-        }, {
-            test: /\.css$/, // Only .css files
-            loader: 'style!css' // Run both loaders
-        }, {
-            test: /\.less$/,  // less
-            loader: 'style!css!less'   
-        }, {
-           test: /\.scss$/,  // sass
-           loader: 'style!css!sass'
-        }, {
-            test: /\.(png|jpg)$/,  // image base 64
-            loader: 'url?limit=25000'
-        }, {
-            test: /\.woff$/,  // 1 in 4 types fonts: .woff | .svg .. 
-            loader: 'url?limit=100000'
-        }],
+        loaders: [
+         { test: /\.jsx?$/,       loader: 'babel'  },
+         { test: /\.css$/,        loader: 'style!css' },
+         { test: /\.less$/,       loader: 'style!css!less'  },
+         { test: /\.scss$/,       loader: 'style!css!sass' }, 
+         { test: /\.(png|jpg)$/,  loader: 'url?limit=25000'  },
+         { test: /bootstrap\/js\//, loader: 'imports?jQuery=jquery' }, 
+         { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,   loader: "url?limit=10000&minetype=application/font-woff" },
+         { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,   loader: "url?limit=10000&minetype=application/font-woff" },
+         { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,    loader: "url?limit=10000&minetype=application/octet-stream" },
+         { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,    loader: "file" },
+         { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,    loader: "url?limit=10000&minetype=image/svg+xml" }
+        ],
         noParse: [path_to_react]
     }
 };
