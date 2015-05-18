@@ -417,3 +417,46 @@ export default React.createClass({
   }
 });
 ```
+
+### Installing and configuring the loader SASS - LESS
+
+npm install less-loader or npm install sass-loader.
+
+webpack.config.js
+
+var path = require('path');
+var config = {
+  entry: path.resolve(__dirname, 'app/main.js')
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js'
+  },
+  module: {
+    loaders: [{
+      test: /\.jsx$/,
+      loader: 'jsx'
+    }, 
+
+    // LESS
+    {
+      test: /\.less$/,
+      loader: 'style!css!less'
+    },
+
+    // SASS
+    {
+      test: /\.scss$/,
+      loader: 'style!css!sass'
+    }]
+  }
+};
+What about imports in LESS and SASS?
+
+If you import one LESS/SASS file from an other, use the exact same pattern as anywhere else. Webpack will dig into these files and figure out the dependencies.
+
+@import "./variables.less";
+You can also load LESS files directly from your node_modules directory.
+
+$import "~bootstrap/less/bootstrap";
+
+
