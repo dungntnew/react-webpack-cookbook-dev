@@ -11,7 +11,6 @@ export default class Hello extends React.Component {
   render() {
     return <div>
     <div className='col-xs-6 col-md-4'>
-    <HelloWorld />
     </div>
     
     <div className='col-xs-12 col-md-8'>
